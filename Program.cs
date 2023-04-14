@@ -14,4 +14,11 @@ app.MapGet("/dbconexion", async ([FromServices] TasksContext dbContext) =>
     return Results.Ok("Base de datos en SQLServer: " + dbContext.Database.IsSqlServer());
 });
 
+app.MapGet("/eliminardb", async([FromServices] TasksContext dbContext) =>
+// Drop the database if it exists
+{
+    
+    return Results.Ok(dbContext.Database.EnsureDeleted());
+});
+
 app.Run();
