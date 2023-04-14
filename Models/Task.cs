@@ -1,22 +1,19 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace projectEF.Models
+﻿namespace projectEF.Models
 {
     public class Task
     {
-        [Key]
+        // [Key]
         public Guid TaskId { get; set; }
-        [ForeignKey("Category")]
+        // [ForeignKey("Category")]
         public Guid CategoriaId { get; set; }
-        [Required]
-        [MaxLength(30, ErrorMessage = "El nombre de la tarea no debe exceder los 30 caracteres"), MinLength(3)]
+        // [Required]
+        // [MaxLength(30, ErrorMessage = "El nombre de la tarea no debe exceder los 30 caracteres"), MinLength(3)]
         public string Title { get; set; }
         public string Description { get; set; }
         public DateTime DateCreated { get; set; }
         public Prioridad PrioridadTarea { get; set; }
         public virtual Category Categoria { get; set; }
-        [NotMapped]
+        // [NotMapped]
         public string Resume { get; set; }
     }
 
