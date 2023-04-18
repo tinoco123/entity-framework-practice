@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace projectEF.Migrations
 {
     [DbContext(typeof(TasksContext))]
-    partial class TasksContextModelSnapshot : ModelSnapshot
+    [Migration("20230418050730_ColumnaPesoEnCategoria")]
+    partial class ColumnaPesoEnCategoria
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -28,6 +31,7 @@ namespace projectEF.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Descripcion")
+                        .IsRequired()
                         .HasMaxLength(300)
                         .HasColumnType("nvarchar(300)");
 
@@ -42,21 +46,6 @@ namespace projectEF.Migrations
                     b.HasKey("CategoryId");
 
                     b.ToTable("Categoria", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            CategoryId = new Guid("24d8f5ca-2451-463d-9ead-db339b16af4e"),
-                            Nombre = "Universidad",
-                            Peso = 50
-                        },
-                        new
-                        {
-                            CategoryId = new Guid("7ab81c93-7b17-43b1-9557-ec31ae80fa71"),
-                            Descripcion = "Canciones del grupo de alabanza",
-                            Nombre = "Grupo de alabanza",
-                            Peso = 50
-                        });
                 });
 
             modelBuilder.Entity("projectEF.Models.Task", b =>
@@ -71,10 +60,8 @@ namespace projectEF.Migrations
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("Deadline")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasMaxLength(300)
                         .HasColumnType("nvarchar(300)");
 
@@ -91,26 +78,6 @@ namespace projectEF.Migrations
                     b.HasIndex("CategoriaId");
 
                     b.ToTable("Tarea", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            TaskId = new Guid("b35e2399-5842-4199-bf75-26511adde087"),
-                            CategoriaId = new Guid("24d8f5ca-2451-463d-9ead-db339b16af4e"),
-                            DateCreated = new DateTime(2023, 4, 17, 23, 44, 24, 830, DateTimeKind.Local).AddTicks(1551),
-                            Deadline = new DateTime(2023, 4, 20, 15, 30, 0, 0, DateTimeKind.Unspecified),
-                            PrioridadTarea = 2,
-                            Title = "Estudiar diagramas de clase"
-                        },
-                        new
-                        {
-                            TaskId = new Guid("633e026b-489e-4960-bd01-ed5736ab1b6c"),
-                            CategoriaId = new Guid("7ab81c93-7b17-43b1-9557-ec31ae80fa71"),
-                            DateCreated = new DateTime(2023, 4, 17, 23, 44, 24, 830, DateTimeKind.Local).AddTicks(1568),
-                            Deadline = new DateTime(2023, 4, 18, 15, 30, 0, 0, DateTimeKind.Unspecified),
-                            PrioridadTarea = 2,
-                            Title = "Mandar canciones para el domingo"
-                        });
                 });
 
             modelBuilder.Entity("projectEF.Models.Task", b =>
