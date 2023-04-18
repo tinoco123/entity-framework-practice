@@ -21,4 +21,9 @@ app.MapGet("/eliminardb", async([FromServices] TasksContext dbContext) =>
     return Results.Ok(dbContext.Database.EnsureDeleted());
 });
 
+app.MapGet("/api/tareas", async([FromServices] TasksContext dbContext ) =>
+{
+    return Results.Ok(dbContext.Tasks.Include(p => p.Categoria).Where(p => p.Deadline > DateTime.Now));
+});
+
 app.Run();
